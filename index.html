@@ -4,13 +4,36 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vue App</title>
+    <title>Adam Desatoff</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Fira Code"
+      rel="stylesheet"
+    />
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   </head>
 
   <body>
-    <div id="app">henlo :]</div>
+    <div id="app">
+      <header>
+        <div id="name">
+          {{ typedName }}
+          <span v-if="typedName !== 'Adam Desatoff'" class="insertPoint"
+            >I</span
+          >
+        </div>
+        <div id="job">
+          {{ typedJob }}
+          <span
+            v-if="typedName == 'Adam Desatoff'"
+            :class="{ blink: blink }"
+            class="insertPoint"
+            >I</span
+          >
+        </div>
+      </header>
+    </div>
+
     <script src="app.js"></script>
   </body>
 </html>

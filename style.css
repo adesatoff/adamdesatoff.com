@@ -1,5 +1,71 @@
+:root {
+  --blue: #398bc9;
+  --orange: #9f5033;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Fira Code";
+}
+body {
+  background-image: url("images/code.jpg");
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+}
+
+#app {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+}
+header {
+  margin-top: 150px;
+  margin-left: 35vw;
+  width: 75vw;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-flow: column nowrap;
+  text-align: left;
+}
+
+#name {
+  font-size: 75px;
+  color: var(--blue);
+}
+#job {
+  font-size: 55px;
+  color: var(--orange);
+  margin-bottom: 1px;
+}
+
+.insertPoint {
+  font-size: 65px;
+  color: lightgray;
+  position: relative;
+  right: 25px;
+  top: 5px;
+}
+
+.blink {
+  font-size: 65px;
+  color: lightgray;
+  animation: blink 1s step-end infinite;
+  position: relative;
+  right: 25px;
+  top: 5px;
+}
+
+@keyframes blink {
+  from,
+  to {
+    color: transparent;
+  }
+  50% {
+    color: white;
+  }
 }
