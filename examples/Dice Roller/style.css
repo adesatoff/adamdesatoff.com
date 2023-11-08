@@ -1,0 +1,37 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Comic Sans MS";
+}
+#app {
+  background: orange;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+  gap: 25px;
+}
+.dice-container {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+}
+.die {
+  width: 100px;
+  height: 100px;
+  background-color: yellow;
+  margin: 5px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.die span:nth-child(2) {
+  font-size: 36px;
+}
+.die:hover {
+  cursor: pointer;
+}

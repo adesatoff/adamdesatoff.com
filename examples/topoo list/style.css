@@ -1,0 +1,132 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Comic Sans MS";
+}
+
+:root {
+  --red: rgb(255, 0, 0);
+  --green: rgb(0, 255, 0);
+  --grey: rgb(75, 75, 75);
+  --white: rgb(255, 255, 255);
+}
+
+body,
+#app {
+  width: 100%;
+  background-color: var(--grey);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-flow: column nowrap;
+  flex-direction: column;
+}
+header {
+  width: 100%;
+  padding: 24px;
+  text-transform: uppercase;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.tasks {
+  width: 90%;
+  margin: 24px 0;
+  text-align: left;
+}
+.tasks > div:nth-child(even) {
+  background-color: gray;
+}
+.row-body,
+.row-head,
+.row-footer {
+  height: 60px;
+  display: grid;
+  background-color: darkgray;
+  grid-template-columns: 1fr 2fr 2fr 1fr 1fr;
+  text-align: center;
+  margin: 10px 0;
+  align-items: center;
+}
+
+.row-footer {
+  font-weight: bold;
+}
+.green {
+  color: var(--green);
+}
+.red {
+  color: var(--red);
+}
+input {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px sold rgba(255, 255, 255, 0.7);
+  padding: 12px;
+  border-radius: 25px;
+  color: var(--grey);
+}
+#search {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+}
+.modal {
+  background-color: rgba(255, 255, 255, 0.55);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+}
+
+.modal .content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+}
+#close {
+  position: fixed;
+  top: 50px;
+  right: 50px;
+  font-weight: bold;
+  color: var(--red);
+  background-color: var(--white);
+  padding: 12px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+button {
+  text-align: center;
+  padding: 8px 12px;
+  margin: 5px;
+}
+.addTask {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+  gap: 20px;
+}
+.edit {
+  padding: 5px 8px;
+  width: auto;
+}
+.checkbox {
+  transform: scale(2);
+}

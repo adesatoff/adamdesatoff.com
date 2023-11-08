@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Magic Mike's Ball</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div id="ball">
+        <div id="message">{{message}}</div>
+      </div>
+      <div id="question">
+        <p v-if="question.length > 2 && !Valid()">Questions end with a ?</p>
+        <p v-else>Ask A Question</p>
+        <input type="text" id="questionArea" v-model="question" />
+        <button
+          class="button"
+          id="submit"
+          v-if="question.length >= 2 && Valid()"
+          v-on:click="askQuestion()"
+        >
+          Ask
+        </button>
+        <div v-for="item in history">
+          {{item.question}} {{item.answer}}
+          <button class="button" v-on:click="deleteItem()">X</button>
+        </div>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
