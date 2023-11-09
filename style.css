@@ -10,7 +10,12 @@
   font-family: "Fira Code";
 }
 body {
-  background-image: url("images/code.jpg");
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    150deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(88, 14, 186, 1) 100%
+  );
   background-size: cover;
   width: 100vw;
   height: 100vh;
@@ -52,6 +57,7 @@ header {
 }
 
 .blink {
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 65px;
   color: lightgray;
   animation: blink 1s step-end infinite;

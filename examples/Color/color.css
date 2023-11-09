@@ -1,0 +1,14 @@
+.container,
+form {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+.color,
+.colorList {
+  width: 200px;
+  height: 100px;
+}

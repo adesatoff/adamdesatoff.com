@@ -1,9 +1,9 @@
-const app = Vue.createApp({
+const mainApp = Vue.createApp({
   data() {
     return {
-      name: "Adam Desatoff",
+      name: "var AdamDesatoff =",
       typedName: "",
-      job: "Computer Science Student",
+      job: "Computer.Science(Student);",
       typedJob: "",
       blink: false,
     };
@@ -49,4 +49,4 @@ const app = Vue.createApp({
   },
 });
 
-app.mount("#app");
+mainApp.mount("#app");

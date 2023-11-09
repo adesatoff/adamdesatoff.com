@@ -19,4 +19,4 @@ Vue.createApp({
       this.blue = 0;
     },
   },
-}).mount("#app");
+}).mount("#color");

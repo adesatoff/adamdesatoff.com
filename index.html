@@ -6,6 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Adam Desatoff</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="examples/Color/color.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="examples/DiceRoller/diceRoller.css"
+      type="text/css"
+    />
+    <!-- <link
+      rel="stylesheet"
+      href="examples/MagicBall/magicBall.css"
+      type="text/css"
+    /> -->
+    <link
+      rel="stylesheet"
+      href="examples/ticTacToe/tictactoe.css"
+      type="text/css"
+    />
     <link
       href="https://fonts.googleapis.com/css?family=Fira Code"
       rel="stylesheet"
@@ -18,22 +34,121 @@
       <header>
         <div id="name">
           {{ typedName }}
-          <span v-if="typedName !== 'Adam Desatoff'" class="insertPoint"
+          <span v-if="typedName !== 'var AdamDesatoff ='" class="insertPoint"
             >I</span
           >
         </div>
         <div id="job">
           {{ typedJob }}
           <span
-            v-if="typedName == 'Adam Desatoff'"
+            v-if="typedName == 'var AdamDesatoff ='"
             :class="{ blink: blink }"
             class="insertPoint"
             >I</span
           >
         </div>
       </header>
+
+      <div>Past Projects</div>
+
+      <section id="ticTacToe">
+        <h1>Tic Tac Toe</h1>
+
+        <h2 class="whoseTurn">Current Turn: X</h2>
+
+        <div class="board">
+          <div class="row">
+            <span class="tile row1 col1 diag1">1</span>
+            <span class="tile row1 col2">2</span>
+            <span class="tile row1 col3 diag2">3</span>
+          </div>
+          <div class="row">
+            <span class="tile row2 col1">4</span>
+            <span class="tile row2 col2 diag1 diag2">5</span>
+            <span class="tile row2 col3">6</span>
+          </div>
+          <div class="row">
+            <span class="tile row3 col1 diag2">7</span>
+            <span class="tile row3 col2">8</span>
+            <span class="tile row3 col3 diag1">9</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="color">
+        <h1>Color Creator</h1>
+        <div class="container">
+          <form @submit.prevent="createColor">
+            <label for="red">RED: </label>
+            <input type="number" placeholder="RED" v-model="red" />
+            <label for="green">GREEN: </label>
+            <input type="number" placeholder="GREEN" v-model="green" />
+            <label for="blue">BLUE: </label>
+            <input type="number" placeholder="BLUE" v-model="blue" />
+            <button type="submit">Create Color!</button>
+          </form>
+          <div class="color" v-bind:style="{ backgroundColor: rgbStr }"></div>
+          <div class="colorList">
+            <div
+              v-for="color in colorList"
+              v-bind:style="{ backgroundColor: color }"
+            >
+              {{ color }}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="diceRoller">
+        <h1>Dice Roller</h1>
+        <p>Sides:</p>
+        <input type="number" v-model="numInput" />
+        <button @click="addDie">Add Die</button>
+
+        <div class="dice-container">
+          <div
+            v-for="(die, index) in dice"
+            class="die"
+            @click="rollDie(index)"
+            @click.ctrl="deleteDie(index)"
+          >
+            <span>{{ die.sides }}</span>
+            <span>{{ die.value }}</span>
+          </div>
+        </div>
+        <div v-if="this.dice != 0">(ctrl + click to delete a die)</div>
+        <button @click="rollAllDice()">Roll All Dice</button>
+      </section>
+
+      <!-- <section id="magicBall">
+        <div id="ball">
+          <div id="message">{{message}}</div>
+        </div>
+        <div id="question">
+          <p v-if="question.length > 2 && !Valid()">Questions end with a ?</p>
+          <p v-else>Ask A Question</p>
+          <input type="text" id="questionArea" v-model="question" />
+          <button
+            class="button"
+            id="submit"
+            v-if="question.length >= 2 && Valid()"
+            v-on:click="askQuestion()"
+          >
+            Ask
+          </button>
+          <div v-for="item in history">
+            {{item.question}} {{item.answer}}
+            <button class="button" v-on:click="deleteItem()">X</button>
+          </div>
+        </div>
+      </section> -->
     </div>
 
     <script src="app.js"></script>
+    <script src="examples/Color/color.js"></script>
+    <!--
+    <script src="examples/DiceRoller/diceRoller.js"></script>
+    <script src="examples/MagicBall/magicBall.js"></script> -->
+    <script src="examples/ticTacToe/tictactoe.js"></script>
   </body>
 </html>

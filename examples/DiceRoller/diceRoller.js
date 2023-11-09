@@ -1,4 +1,4 @@
-Vue.createApp({
+const diceRoller = Vue.createApp({
   data() {
     return {
       numInput: 0,
@@ -30,4 +30,6 @@ Vue.createApp({
       this.dice.splice(index, 1);
     },
   },
-}).mount("#app");
+});
+
+diceRoller.mount("#diceRoller");

@@ -37,4 +37,4 @@ Vue.createApp({
     },
   },
   created: function () {},
-}).mount("#app");
+}).mount("#magicBall");
