@@ -1,8 +1,3 @@
-body {
-  font-family: "Comic Sans MS", "cursive";
-  text-align: center;
-}
-
 .guess {
   display: flex;
   justify-content: center;
@@ -36,11 +31,11 @@ body {
   border-color: #6aaa64;
 }
 
-#inputs {
+#werdle #inputs {
   margin: 20px 0;
 }
 
-#message {
+#werdle #message {
   font-size: 20px;
   font-weight: bold;
   margin: 10px;

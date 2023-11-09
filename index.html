@@ -5,28 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Adam Desatoff</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="examples/Color/color.css" type="text/css" />
-    <link
-      rel="stylesheet"
-      href="examples/DiceRoller/diceRoller.css"
-      type="text/css"
-    />
-    <!-- <link
-      rel="stylesheet"
-      href="examples/MagicBall/magicBall.css"
-      type="text/css"
-    /> -->
-    <link
-      rel="stylesheet"
-      href="examples/ticTacToe/tictactoe.css"
-      type="text/css"
-    />
+    <link href="stylesheets/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/color.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/diceRoller.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/magicBall.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/tictactoe.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/toDoList.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/werdle.css" type="text/css" />
     <link
       href="https://fonts.googleapis.com/css?family=Fira Code"
       rel="stylesheet"
     />
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://momentjs.com/downloads/moment.js"></script>
+    <script src="scripts/tictactoe.js"></script>
+    <script src="scripts/werdle.js"></script>
   </head>
 
   <body>
@@ -34,14 +27,14 @@
       <header>
         <div id="name">
           {{ typedName }}
-          <span v-if="typedName !== 'var AdamDesatoff ='" class="insertPoint"
+          <span v-if="typedName !== 'var Adam_Desatoff ='" class="insertPoint"
             >I</span
           >
         </div>
         <div id="job">
           {{ typedJob }}
           <span
-            v-if="typedName == 'var AdamDesatoff ='"
+            v-if="typedName == 'var Adam_Desatoff ='"
             :class="{ blink: blink }"
             class="insertPoint"
             >I</span
@@ -120,7 +113,7 @@
         <button @click="rollAllDice()">Roll All Dice</button>
       </section>
 
-      <!-- <section id="magicBall">
+      <section id="magicBall">
         <div id="ball">
           <div id="message">{{message}}</div>
         </div>
@@ -141,14 +134,126 @@
             <button class="button" v-on:click="deleteItem()">X</button>
           </div>
         </div>
-      </section> -->
-    </div>
+      </section>
 
-    <script src="app.js"></script>
-    <script src="examples/Color/color.js"></script>
-    <!--
-    <script src="examples/DiceRoller/diceRoller.js"></script>
-    <script src="examples/MagicBall/magicBall.js"></script> -->
-    <script src="examples/ticTacToe/tictactoe.js"></script>
+      <section id="toDoList">
+        <header>
+          <h1>To-Do</h1>
+          <div id="search">
+            <input type="text" placeholder="Search" v-model="search" />
+            <div id="clear-search" v-on:click="clearSearch()">X</div>
+          </div>
+        </header>
+
+        <div class="addTask">
+          <h1>Add a New Task</h1>
+          <input
+            type="text"
+            placeholder="Task Description"
+            v-model="taskDesc"
+          />
+          <input type="text" placeholder="Task Category" v-model="taskCat" />
+          <button
+            v-if="taskDesc.length > 0 && taskCat.length > 0"
+            @click="addTask(taskDesc, taskCat)"
+          >
+            Add Task
+          </button>
+        </div>
+
+        <div class="tasks">
+          <div class="row-head" v-if="tasks.length > 0">
+            <div></div>
+            <div>Description</div>
+            <div>
+              Category
+              <span @click="sortTasks()" v-if="sortOrder == 'asc'">&and;</span>
+              <span @click="sortTasks()" v-else>&or;</span>
+            </div>
+            <div></div>
+            <div></div>
+          </div>
+
+          <div
+            v-for="task in filteredTasks"
+            class="row-body"
+            v-if="search.length > 0 && filteredTasks.length > 0"
+          >
+            <input type="checkbox" class="checkbox" />
+            <div>{{task.description}}</div>
+            <div>{{task.category}}</div>
+            <button @click="toggleModal(index)" class="button">Edit</button>
+            <button @click="deleteTask(index)" class="button">Delete</button>
+          </div>
+
+          <div
+            v-for="(task, index) in tasks"
+            class="row-body"
+            v-if="!filteredTasks.length > 0"
+          >
+            <input type="checkbox" class="checkbox" />
+            <div>{{task.description}}</div>
+            <div>{{task.category}}</div>
+            <button @click="toggleModal(index)" class="button">Edit</button>
+            <button @click="deleteTask(index)" class="button">Delete</button>
+          </div>
+
+          <div class="modal" v-show="modalOpen">
+            <div class="content">
+              <div id="close" @click="toggleModal(index)">X</div>
+              Description<input type="text" v-model="modal.description" />
+              Category<input type="text" v-model="modal.category" />
+              <button @click="updateTask(); toggleModal()">Save</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="unitConverter">
+        <h1>Unit Converter</h1>
+
+        <p>Gigabytes(GB) to Megabytes(MB)</p>
+        <input type="number" v-model="left" />
+        <button v-on:click="convertLeft" v-show="isValidInput(left)">
+          Convert to MB
+        </button>
+        <div>{{ answerLeft }} MB</div>
+
+        <p>Megabytes(MB) to Kilobytes(KB)</p>
+        <input type="number" v-model="right" />
+        <button v-on:click="convertRight" v-show="isValidInput(right)">
+          Convert to KB
+        </button>
+        <div>{{ answerRight }} KB</div>
+      </section>
+
+      <section id="werdle">
+        <h1>Werdle</h1>
+
+        <div id="guesses"></div>
+
+        <div id="inputs">
+          <input type="text" id="guess-input" />
+          <button id="guess-button">Guess</button>
+          <div id="message"></div>
+          <div id="num-wins">Number of Wins:</div>
+        </div>
+      </section>
+
+      <section id="whackAMole">
+        <h1>Whack-A-Mole!</h1>
+        <div class="row" v-for="row in rows">
+          <div class="col" v-for="col in columns">
+            <div
+              class="mole"
+              v-if="moleRow == row && moleCol == col"
+              v-on:click="hitMole()"
+            ></div>
+          </div>
+        </div>
+        <h2 id="score">Score: {{score}}/{{total}}</h2>
+      </section>
+    </div>
+    <script src="scripts/app.js"></script>
   </body>
 </html>

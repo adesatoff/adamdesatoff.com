@@ -1,28 +1,14 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Comic Sans MS";
-}
-body {
-  background-color: wheat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
 .mole {
   background-color: yellow;
   border-radius: 50%;
   height: inherit;
   width: inherit;
 }
-.row {
+#whackAMole .row {
   margin: 16px;
 }
 
-.col {
+#whackAMole .col {
   display: inline-block;
   background-color: gray;
   width: 75px;
