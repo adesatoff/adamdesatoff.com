@@ -1,7 +1,8 @@
-const app = Vue.createApp({
+Vue.createApp({
   data() {
     return {
-      name: "var Adam_Desatoff =",
+      galleryNum: 1,
+      name: "const Adam_Desatoff =",
       typedName: "",
       job: "Computer.Science(Student);",
       typedJob: "",
@@ -9,10 +10,10 @@ const app = Vue.createApp({
       numInput: 0,
       dice: [],
       colorList: [],
-      red: 0,
-      green: 0,
-      blue: 0,
-      rgbStr: "rgb(0, 0, 0)",
+      red: null,
+      green: null,
+      blue: null,
+      rgbStr: "rgb(null, null, null)",
       message: "",
       options: [
         "Yes.",
@@ -20,7 +21,7 @@ const app = Vue.createApp({
         "Ask Again Later.",
         "Most Likely.",
         "Don't Get Your Hopes Up.",
-        "Joe Biden.",
+        "Only Time Will Tell.",
       ],
       question: "",
       history: [],
@@ -49,6 +50,18 @@ const app = Vue.createApp({
     };
   },
   methods: {
+    galleryForward() {
+      this.galleryNum++;
+      if (this.galleryNum > 8) {
+        this.galleryNum = 1;
+      }
+    },
+    galleryBack() {
+      this.galleryNum--;
+      if (this.galleryNum < 1) {
+        this.galleryNum = 8;
+      }
+    },
     typeName() {
       let i = 0;
       const nameLength = this.name.length;
@@ -78,6 +91,7 @@ const app = Vue.createApp({
         }
       }, typeInterval);
     },
+    // Dice Roller
     addDie: function () {
       if (this.numInput > 0) {
         this.dice.push({ sides: this.numInput, value: 1 });
@@ -97,19 +111,20 @@ const app = Vue.createApp({
         this.rollDie(index);
       });
     },
-
     deleteDie: function (index) {
       this.dice.splice(index, 1);
     },
+    // Color Creator
     createColor: function () {
       this.rgbStr = `rgb(${this.red}, ${this.green}, ${this.blue})`;
 
       this.colorList.push(this.rgbStr);
 
-      this.red = 0;
-      this.green = 0;
-      this.blue = 0;
+      this.red = null;
+      this.green = null;
+      this.blue = null;
     },
+    // Magic 8 ball
     askQuestion: function () {
       let index = Math.floor(Math.random() * this.options.length);
       let message = this.options[index];
@@ -130,6 +145,7 @@ const app = Vue.createApp({
       var index = this.history.indexOf(item);
       this.history.splice(index, 1);
     },
+    // To-Do List
     addTask(taskDesc, taskCat) {
       let task = {
         description: taskDesc,
@@ -175,6 +191,7 @@ const app = Vue.createApp({
       this.tasks[this.modal.index].description = this.modal.description;
       this.tasks[this.modal.index].category = this.modal.category;
     },
+    // Unit Converter
     convertLeft: function () {
       if (this.isValidInput(this.left)) {
         let GBtoMB = this.left * 1000;
@@ -194,7 +211,9 @@ const app = Vue.createApp({
     isValidInput: function (input) {
       return input !== null && input !== "" && !isNaN(input);
     },
+    // Whack-A-Mole
     moveMole: function () {
+      this.resetMole();
       var moleTime = setInterval(() => {
         this.moleRow = Math.ceil(Math.random() * this.rows);
         this.moleCol = Math.ceil(Math.random() * this.columns);
@@ -208,6 +227,10 @@ const app = Vue.createApp({
         }
       }, 1000);
     },
+    resetMole: function () {
+      this.score = 0;
+      this.total = 0;
+    },
     hitMole: function () {
       this.score++;
       this.moleRow = -1;
@@ -217,11 +240,10 @@ const app = Vue.createApp({
   created() {
     setTimeout(() => {
       this.typeName();
-    }, 500);
+    }, 350);
     setTimeout(() => {
       this.typeJob();
-    }, 2250);
-    this.moveMole();
+    }, 2350);
   },
   watch: {
     search(newSearch, oldSearch) {
@@ -230,6 +252,4 @@ const app = Vue.createApp({
       });
     },
   },
-});
-
-app.mount("#app");
+}).mount("#app");

@@ -13,36 +13,6 @@ var gameOver = false;
 
 var numWinsDiv = document.querySelector("#num-wins");
 
-function saveState() {
-  localStorage.setItem("correctWord", JSON.stringify(correctWord));
-  localStorage.setItem("guesses", JSON.stringify(guesses));
-  localStorage.setItem("gameOver", JSON.stringify(gameOver));
-  localStorage.setItem("numWins", numWins);
-}
-
-function loadState() {
-  correctWord = localStorage.getItem(
-    "correctWord",
-    JSON.stringify(correctWord)
-  );
-  guesses = JSON.parse(
-    localStorage.getItem("guesses", JSON.stringify(guesses))
-  );
-  gameOver = JSON.parse(
-    localStorage.getItem("gameOver", JSON.stringify(gameOver))
-  );
-  numWins = JSON.parse(
-    localStorage.getItem("numWins", JSON.stringify(numWins))
-  );
-
-  if (!guesses) {
-    guesses = [];
-  }
-  if (!gameOver) {
-    gameOver = false;
-  }
-}
-
 function resetGame() {
   correctWord = "";
   currentGuess = "";
@@ -52,13 +22,11 @@ function resetGame() {
 
 function fetchWordList() {
   fetch(
-    "https://raw.githubusercontent.com/droyson/go-fetch-words/main/5-letter-words.json"
+    "https://gist.githubusercontent.com/mrhead/f0ced2726394588e8d9863e0568b6473/raw/89e48277775f30e60ff60592d6e3d4acfe733e10/wordle.json"
   ).then(function (response) {
     response.json().then(function (data) {
       allowed = data;
       answers = data;
-
-      loadState();
       chooseNewWord();
       updateGuesses();
       setupInputs();
@@ -77,7 +45,6 @@ function chooseNewWord() {
   if (!correctWord || correctWord != newWord) {
     resetGame();
     correctWord = newWord;
-    saveState();
     console.log("The answer is now:", correctWord);
   } else {
     console.log("The answer is still:", correctWord);
@@ -115,7 +82,7 @@ function checkWord(correct, guess) {
 }
 
 function updateGuesses() {
-  var allGuessesDiv = document.querySelector("#guesses");
+  var allGuessesDiv = document.querySelector("#werdleGuesses");
   allGuessesDiv.innerHTML = "";
 
   for (var i = 0; i < ATTEMPTS; i++) {
@@ -152,12 +119,12 @@ function updateGuesses() {
 }
 
 function submitGuess() {
-  var messageDiv = document.querySelector("#message");
+  var messageDiv = document.querySelector(" #message");
 
   if (currentGuess.length != 5) {
     messageDiv.innerHTML = "5 letters required.";
   } else if (!allowed.includes(currentGuess)) {
-    messageDiv.innerHTML = "Not a real word. Try again.";
+    messageDiv.innerHTML = "Not in word list. Try again.";
   } else {
     if (guesses.length < 6) {
       guesses.push(currentGuess);
@@ -175,7 +142,6 @@ function submitGuess() {
       messageDiv.innerHTML = "Game over!";
       gameOver = true;
     }
-    saveState();
   }
 
   if (gameOver) {

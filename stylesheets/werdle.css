@@ -1,3 +1,16 @@
+#werdle * {
+  text-align: center;
+}
+
+#werdle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+  height: 500px;
+  width: 500px;
+}
+
 .guess {
   display: flex;
   justify-content: center;
@@ -33,6 +46,11 @@
 
 #werdle #inputs {
   margin: 20px 0;
+}
+
+#werdle button {
+  margin-top: 20px;
+  font-size: 20px;
 }
 
 #werdle #message {

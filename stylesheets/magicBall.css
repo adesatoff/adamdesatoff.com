@@ -1,7 +1,15 @@
+#magicBall {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+  gap: 25px;
+}
+
 #ball {
   background-color: black;
-  width: 80vw;
-  height: 80vh;
+  width: 300px;
+  height: 300px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -9,21 +17,22 @@
 }
 #magicBall #message {
   background-color: white;
-  width: 30vw;
-  height: 30vh;
+  width: 125px;
+  height: 125px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 #questionArea {
-  font-size: 50px;
+  font-size: 20px;
   margin-bottom: 20px;
 }
 #magicBall .button {
-  font-size: 25px;
+  font-size: 20px;
   border-radius: 25px;
-  padding: 12px 15px;
+  padding: 4px 8px;
 }
 #question {
   display: flex;

@@ -10,11 +10,11 @@
   font-family: "Fira Code";
 }
 body {
-  background: rgb(0, 0, 0);
+  background: rgb(24, 24, 24);
   background: linear-gradient(
     150deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(88, 14, 186, 1) 100%
+    rgba(24, 24, 24, 1) 0%,
+    rgba(80, 80, 80, 1) 100%
   );
   background-size: cover;
   width: 100%;
@@ -26,7 +26,9 @@ body {
   flex-flow: column nowrap;
   align-items: center;
   justify-content: center;
+  gap: 50px;
 }
+
 header {
   margin-top: 150px;
   margin-left: 35%;
@@ -65,6 +67,33 @@ header {
   position: relative;
   right: 25px;
   top: 5px;
+}
+
+#projectHeader {
+  font-size: 45px;
+  margin-top: 100px;
+}
+
+#galleryNav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row nowrap;
+}
+
+.galleryDot {
+  font-size: 40px;
+  position: relative;
+  bottom: 10px;
+}
+
+.activeDot {
+  color: white;
+}
+
+.hideWerdle {
+  position: absolute;
+  bottom: 99999px;
 }
 
 @keyframes blink {

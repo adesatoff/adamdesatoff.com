@@ -1,5 +1,5 @@
 .mole {
-  background-color: yellow;
+  background-color: brown;
   border-radius: 50%;
   height: inherit;
   width: inherit;
@@ -10,9 +10,24 @@
 
 #whackAMole .col {
   display: inline-block;
-  background-color: gray;
+  background-color: pink;
   width: 75px;
   height: 75px;
   margin: 0 16px;
   border-radius: 5px;
+}
+
+#whackAMole {
+  width: 500px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+  gap: 10px;
+}
+
+#whackAMole button {
+  padding: 10px;
+  font-size: 25px;
 }

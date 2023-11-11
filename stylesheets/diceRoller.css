@@ -1,10 +1,10 @@
 #diceRoller {
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-flow: column nowrap;
   gap: 25px;
+  font-size: 30px;
 }
 .dice-container {
   display: flex;
@@ -12,10 +12,16 @@
   align-items: center;
   justify-content: center;
 }
+
+#diceRoller button {
+  padding: 15px;
+  font-size: 20px;
+}
+
 .die {
   width: 100px;
   height: 100px;
-  background-color: yellow;
+  background-color: white;
   margin: 5px;
   display: flex;
   flex-flow: column nowrap;

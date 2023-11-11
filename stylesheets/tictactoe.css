@@ -1,3 +1,14 @@
+#ticTacToe {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+}
+
+#ticTacToe h1 {
+  font-size: 50px;
+}
+
 .tile {
   background-color: gray;
   padding: 50px;

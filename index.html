@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Adam Desatoff</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://momentjs.com/downloads/moment.js"></script>
     <link href="stylesheets/style.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="stylesheets/color.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/diceRoller.css" type="text/css" />
@@ -13,13 +15,15 @@
     <link rel="stylesheet" href="stylesheets/toDoList.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/werdle.css" type="text/css" />
     <link
+      rel="stylesheet"
+      href="stylesheets/unitConverter.css"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="stylesheets/whackAMole.css" type="text/css" />
+    <link
       href="https://fonts.googleapis.com/css?family=Fira Code"
       rel="stylesheet"
     />
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="https://momentjs.com/downloads/moment.js"></script>
-    <script src="scripts/tictactoe.js"></script>
-    <script src="scripts/werdle.js"></script>
   </head>
 
   <body>
@@ -27,14 +31,14 @@
       <header>
         <div id="name">
           {{ typedName }}
-          <span v-if="typedName !== 'var Adam_Desatoff ='" class="insertPoint"
+          <span v-if="typedName !== 'const Adam_Desatoff ='" class="insertPoint"
             >I</span
           >
         </div>
         <div id="job">
           {{ typedJob }}
           <span
-            v-if="typedName == 'var Adam_Desatoff ='"
+            v-if="typedName == 'const Adam_Desatoff ='"
             :class="{ blink: blink }"
             class="insertPoint"
             >I</span
@@ -42,9 +46,9 @@
         </div>
       </header>
 
-      <div>Past Projects</div>
+      <div id="projectHeader">Past Projects</div>
 
-      <section id="ticTacToe">
+      <section id="ticTacToe" v-if="galleryNum == 1">
         <h1>Tic Tac Toe</h1>
 
         <h2 class="whoseTurn">Current Turn: X</h2>
@@ -68,7 +72,7 @@
         </div>
       </section>
 
-      <section id="color">
+      <section id="color" v-if="galleryNum == 2">
         <h1>Color Creator</h1>
         <div class="container">
           <form @submit.prevent="createColor">
@@ -92,7 +96,7 @@
         </div>
       </section>
 
-      <section id="diceRoller">
+      <section id="diceRoller" v-if="galleryNum == 3">
         <h1>Dice Roller</h1>
         <p>Sides:</p>
         <input type="number" v-model="numInput" />
@@ -113,13 +117,15 @@
         <button @click="rollAllDice()">Roll All Dice</button>
       </section>
 
-      <section id="magicBall">
+      <section id="magicBall" v-if="galleryNum == 4">
+        <h1>Magic 8 Ball</h1>
         <div id="ball">
           <div id="message">{{message}}</div>
         </div>
         <div id="question">
           <p v-if="question.length > 2 && !Valid()">Questions end with a ?</p>
           <p v-else>Ask A Question</p>
+          <br /><br /><br />
           <input type="text" id="questionArea" v-model="question" />
           <button
             class="button"
@@ -136,7 +142,7 @@
         </div>
       </section>
 
-      <section id="toDoList">
+      <section id="toDoList" v-if="galleryNum == 5">
         <header>
           <h1>To-Do</h1>
           <div id="search">
@@ -209,7 +215,7 @@
         </div>
       </section>
 
-      <section id="unitConverter">
+      <section id="unitConverter" v-if="galleryNum == 6">
         <h1>Unit Converter</h1>
 
         <p>Gigabytes(GB) to Megabytes(MB)</p>
@@ -227,20 +233,19 @@
         <div>{{ answerRight }} KB</div>
       </section>
 
-      <section id="werdle">
+      <section id="werdle" :class="{ hideWerdle: galleryNum !== 7}">
         <h1>Werdle</h1>
 
-        <div id="guesses"></div>
+        <div id="werdleGuesses"></div>
 
         <div id="inputs">
-          <input type="text" id="guess-input" />
-          <button id="guess-button">Guess</button>
+          <p>Use your keyboard to play!</p>
           <div id="message"></div>
           <div id="num-wins">Number of Wins:</div>
         </div>
       </section>
 
-      <section id="whackAMole">
+      <section id="whackAMole" v-if="galleryNum == 8">
         <h1>Whack-A-Mole!</h1>
         <div class="row" v-for="row in rows">
           <div class="col" v-for="col in columns">
@@ -252,8 +257,42 @@
           </div>
         </div>
         <h2 id="score">Score: {{score}}/{{total}}</h2>
+        <button @click="moveMole()">Play!</button>
       </section>
+
+      <div id="galleryNav">
+        <button class="galleryButton" @click="galleryBack()">&lt;</button>
+        <div id="galleryDots">
+          <span class="galleryDot" :class="{ activeDot: galleryNum == 1 }"
+            >.</span
+          >
+          <span class="galleryDot" :class="{ activeDot: galleryNum == 2 }"
+            >.</span
+          >
+          <span class="galleryDot" :class="{ activeDot: galleryNum == 3 }"
+            >.</span
+          >
+          <span class="galleryDot" :class="{ activeDot: galleryNum == 4 }"
+            >.</span
+          >
+          <span class="galleryDot" :class="{ activeDot: galleryNum == 5 }"
+            >.</span
+          >
+          <span class="galleryDot" :class="{ activeDot: galleryNum == 6 }"
+            >.</span
+          >
+          <span class="galleryDot" :class="{ activeDot: galleryNum == 7 }"
+            >.</span
+          >
+          <span class="galleryDot" :class="{ activeDot: galleryNum == 8 }"
+            >.</span
+          >
+        </div>
+        <button class="galleryButton" @click="galleryForward()">&gt;</button>
+      </div>
     </div>
     <script src="scripts/app.js"></script>
+    <script src="scripts/tictactoe.js"></script>
+    <script src="scripts/werdle.js"></script>
   </body>
 </html>
