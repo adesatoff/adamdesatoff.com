@@ -5,7 +5,6 @@
   align-items: center;
   font-size: 20px;
   padding-top: 10px;
-  transition: opacity 0.5s ease-in-out;
 }
 
 #color > .container,
