@@ -10,6 +10,9 @@
   justify-content: center;
   align-items: center;
   flex-flow: column nowrap;
+  max-width: 500px;
+  max-height: 500px;
+  transition: opacity 0.5s ease-in-out;
 }
 
 #toDoList header {
@@ -51,12 +54,26 @@
 .red {
   color: var(--red);
 }
-#toDoList input {
-  background-color: rgba(255, 255, 255, 0.5);
-  border: 1px sold rgba(255, 255, 255, 0.7);
+#taskDesc,
+#taskCat {
+  background-color: transparent;
+  border: none;
+  border-bottom: 3px solid rgba(255, 255, 255);
+  padding: 15px;
+  color: white;
+}
+
+#taskDesc:focus,
+#taskCat:focus {
+  border: none;
+  border-bottom: 3px solid rgba(255, 255, 255);
+}
+#toDoSearch {
+  background-color: darkgray;
+  border: 1px solid black;
   padding: 12px;
-  border-radius: 25px;
-  color: var(--grey);
+  color: white;
+  border-radius: 50px;
 }
 #search {
   display: flex;

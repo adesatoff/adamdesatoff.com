@@ -8,14 +8,10 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Fira Code";
+  color: white;
 }
 body {
-  background: rgb(24, 24, 24);
-  background: linear-gradient(
-    150deg,
-    rgba(24, 24, 24, 1) 0%,
-    rgba(80, 80, 80, 1) 100%
-  );
+  background-image: url("../images/backgroundBlur.jpg");
   background-size: cover;
   width: 100%;
   height: 100%;
@@ -29,7 +25,7 @@ body {
   gap: 50px;
 }
 
-header {
+#waffle {
   margin-top: 150px;
   margin-left: 35%;
   width: 75%;
@@ -71,7 +67,18 @@ header {
 
 #projectHeader {
   font-size: 45px;
-  margin-top: 100px;
+  margin-top: 75px;
+  margin-bottom: 25px;
+}
+
+input {
+  background-color: rgb(75, 75, 75);
+  border: 1px solid white;
+}
+
+button {
+  background-color: rgb(75, 75, 75);
+  color: white;
 }
 
 #galleryNav {
@@ -79,16 +86,25 @@ header {
   justify-content: center;
   align-items: center;
   flex-flow: row nowrap;
+  text-align: center;
 }
 
 .galleryDot {
   font-size: 40px;
-  position: relative;
-  bottom: 10px;
+  text-align: center;
+}
+
+.galleryButton {
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  margin: 10px;
 }
 
 .activeDot {
-  color: white;
+  color: maroon;
+  font-size: 40px;
+  text-align: center;
 }
 
 .hideWerdle {

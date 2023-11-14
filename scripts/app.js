@@ -13,6 +13,7 @@ Vue.createApp({
       red: null,
       green: null,
       blue: null,
+      txtColor: "white",
       rgbStr: "rgb(null, null, null)",
       message: "",
       options: [
@@ -93,7 +94,7 @@ Vue.createApp({
     },
     // Dice Roller
     addDie: function () {
-      if (this.numInput > 0) {
+      if (this.isValidInput(this.numInput)) {
         this.dice.push({ sides: this.numInput, value: 1 });
       }
     },
@@ -115,15 +116,25 @@ Vue.createApp({
       this.dice.splice(index, 1);
     },
     // Color Creator
-    createColor: function () {
+    createColor() {
       this.rgbStr = `rgb(${this.red}, ${this.green}, ${this.blue})`;
+      this.txtColor = this.getTextColor(this.rgbStr);
 
+      if (this.colorList.length >= 5) {
+        this.colorList.shift();
+      }
       this.colorList.push(this.rgbStr);
 
       this.red = null;
       this.green = null;
       this.blue = null;
     },
+    getTextColor(bgColor) {
+      const [r, g, b] = bgColor.slice(4, -1).split(",").map(Number);
+      const luminance = (r * 299 + g * 587 + b * 114) / 1000;
+      return luminance > 128 ? "black" : "white";
+    },
+
     // Magic 8 ball
     askQuestion: function () {
       let index = Math.floor(Math.random() * this.options.length);

@@ -3,6 +3,9 @@
   justify-content: center;
   align-items: center;
   flex-flow: column nowrap;
+  max-width: 500px;
+  max-height: 500px;
+  transition: opacity 0.5s ease-in-out;
 }
 
 #ticTacToe h1 {
@@ -11,10 +14,10 @@
 
 .tile {
   background-color: gray;
-  padding: 50px;
+  padding: 40px;
   width: auto;
   height: auto;
-  font-size: 48px;
+  font-size: 30px;
 }
 .board {
   margin-top: 50px;

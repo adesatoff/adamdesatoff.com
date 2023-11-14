@@ -4,6 +4,9 @@
   align-items: center;
   flex-flow: column nowrap;
   gap: 25px;
+  max-width: 500px;
+  max-height: 500px;
+  transition: opacity 0.5s ease-in-out;
 }
 
 #ball {
@@ -15,7 +18,7 @@
   align-items: center;
   justify-content: center;
 }
-#magicBall #message {
+#fortune {
   background-color: white;
   width: 125px;
   height: 125px;
@@ -28,11 +31,15 @@
 #questionArea {
   font-size: 20px;
   margin-bottom: 20px;
+  background-color: rgb(75, 75, 75);
+  border: 2px solid white;
 }
 #magicBall .button {
   font-size: 20px;
   border-radius: 25px;
   padding: 4px 8px;
+  background-color: black;
+  border: 5px solid rgb(75, 75, 75);
 }
 #question {
   display: flex;

@@ -27,8 +27,9 @@
   </head>
 
   <body>
+    <div id="background"></div>
     <div id="app">
-      <header>
+      <header id="waffle">
         <div id="name">
           {{ typedName }}
           <span v-if="typedName !== 'const Adam_Desatoff ='" class="insertPoint"
@@ -48,7 +49,7 @@
 
       <div id="projectHeader">Past Projects</div>
 
-      <section id="ticTacToe" v-if="galleryNum == 1">
+      <section id="ticTacToe" v-show="galleryNum === 1">
         <h1>Tic Tac Toe</h1>
 
         <h2 class="whoseTurn">Current Turn: X</h2>
@@ -72,7 +73,7 @@
         </div>
       </section>
 
-      <section id="color" v-if="galleryNum == 2">
+      <section id="color" v-show="galleryNum === 2">
         <h1>Color Creator</h1>
         <div class="container">
           <form @submit.prevent="createColor">
@@ -84,11 +85,16 @@
             <input type="number" placeholder="BLUE" v-model="blue" />
             <button type="submit">Create Color!</button>
           </form>
-          <div class="color" v-bind:style="{ backgroundColor: rgbStr }"></div>
+          <div
+            class="color"
+            :style="{ backgroundColor: rgbStr, color: txtColor }"
+          ></div>
           <div class="colorList">
             <div
               v-for="color in colorList"
-              v-bind:style="{ backgroundColor: color }"
+              :key="color"
+              :style="{ backgroundColor: color, color: getTextColor(color) }"
+              class="listItem"
             >
               {{ color }}
             </div>
@@ -96,7 +102,7 @@
         </div>
       </section>
 
-      <section id="diceRoller" v-if="galleryNum == 3">
+      <section id="diceRoller" v-show="galleryNum === 3">
         <h1>Dice Roller</h1>
         <p>Sides:</p>
         <input type="number" v-model="numInput" />
@@ -113,14 +119,16 @@
             <span>{{ die.value }}</span>
           </div>
         </div>
-        <div v-if="this.dice != 0">(ctrl + click to delete a die)</div>
+        <div v-if="this.dice != 0" style="font-size: 15px">
+          (ctrl + click to delete a die)
+        </div>
         <button @click="rollAllDice()">Roll All Dice</button>
       </section>
 
-      <section id="magicBall" v-if="galleryNum == 4">
+      <section id="magicBall" v-show="galleryNum === 4">
         <h1>Magic 8 Ball</h1>
         <div id="ball">
-          <div id="message">{{message}}</div>
+          <div id="fortune">{{message}}</div>
         </div>
         <div id="question">
           <p v-if="question.length > 2 && !Valid()">Questions end with a ?</p>
@@ -142,11 +150,16 @@
         </div>
       </section>
 
-      <section id="toDoList" v-if="galleryNum == 5">
+      <section id="toDoList" v-show="galleryNum === 5">
         <header>
           <h1>To-Do</h1>
           <div id="search">
-            <input type="text" placeholder="Search" v-model="search" />
+            <input
+              type="text"
+              placeholder="Search"
+              v-model="search"
+              id="toDoSearch"
+            />
             <div id="clear-search" v-on:click="clearSearch()">X</div>
           </div>
         </header>
@@ -157,8 +170,14 @@
             type="text"
             placeholder="Task Description"
             v-model="taskDesc"
+            id="taskDesc"
           />
-          <input type="text" placeholder="Task Category" v-model="taskCat" />
+          <input
+            id="taskCat"
+            type="text"
+            placeholder="Task Category"
+            v-model="taskCat"
+          />
           <button
             v-if="taskDesc.length > 0 && taskCat.length > 0"
             @click="addTask(taskDesc, taskCat)"
@@ -215,7 +234,7 @@
         </div>
       </section>
 
-      <section id="unitConverter" v-if="galleryNum == 6">
+      <section id="unitConverter" v-show="galleryNum === 6">
         <h1>Unit Converter</h1>
 
         <p>Gigabytes(GB) to Megabytes(MB)</p>
@@ -245,8 +264,8 @@
         </div>
       </section>
 
-      <section id="whackAMole" v-if="galleryNum == 8">
-        <h1>Whack-A-Mole!</h1>
+      <section id="whackAMole" v-show="galleryNum === 8">
+        <h1>Click-A-Mole!</h1>
         <div class="row" v-for="row in rows">
           <div class="col" v-for="col in columns">
             <div
@@ -264,28 +283,28 @@
         <button class="galleryButton" @click="galleryBack()">&lt;</button>
         <div id="galleryDots">
           <span class="galleryDot" :class="{ activeDot: galleryNum == 1 }"
-            >.</span
+            >•</span
           >
           <span class="galleryDot" :class="{ activeDot: galleryNum == 2 }"
-            >.</span
+            >•</span
           >
           <span class="galleryDot" :class="{ activeDot: galleryNum == 3 }"
-            >.</span
+            >•</span
           >
           <span class="galleryDot" :class="{ activeDot: galleryNum == 4 }"
-            >.</span
+            >•</span
           >
           <span class="galleryDot" :class="{ activeDot: galleryNum == 5 }"
-            >.</span
+            >•</span
           >
           <span class="galleryDot" :class="{ activeDot: galleryNum == 6 }"
-            >.</span
+            >•</span
           >
           <span class="galleryDot" :class="{ activeDot: galleryNum == 7 }"
-            >.</span
+            >•</span
           >
           <span class="galleryDot" :class="{ activeDot: galleryNum == 8 }"
-            >.</span
+            >•</span
           >
         </div>
         <button class="galleryButton" @click="galleryForward()">&gt;</button>
