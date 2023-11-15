@@ -27,12 +27,11 @@ body {
 
 #waffle {
   margin-top: 150px;
-  width: 75%;
   display: flex;
   align-items: flex-start;
   justify-content: center;
   flex-flow: column nowrap;
-  text-align: left;
+  text-align: center;
 }
 
 #name {
@@ -118,5 +117,71 @@ button {
   }
   50% {
     color: white;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  #waffle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column nowrap;
+    text-align: center;
+    max-width: 80vw;
+  }
+  #waffle > * {
+    font-size: 3em;
+  }
+  #job {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row nowrap;
+    gap: 20px;
+  }
+  .insertPoint {
+    font-size: 5rem;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  #waffle * {
+    transform: scale(70%);
+  }
+}
+
+@media screen and (max-width: 900px) {
+  #waffle * {
+    transform: scale(87%);
+  }
+}
+
+@media screen and (max-width: 700px) {
+  #waffle * {
+    transform: scale(85%);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  * {
+    transform: scale(84%);
+  }
+}
+
+@media screen and (max-width: 500px) {
+  * {
+    transform: scale(83%);
+  }
+}
+
+@media screen and (max-width: 400px) {
+  * {
+    transform: scale(82%);
+  }
+}
+
+@media screen and (max-width: 300px) {
+  * {
+    transform: scale(81%);
   }
 }
