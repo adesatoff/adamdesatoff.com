@@ -33,11 +33,7 @@ Vue.createApp({
       modalOpen: false,
       taskDesc: "",
       taskCat: "",
-      modal: {
-        index: -1,
-        description: "",
-        category: "",
-      },
+      modal: { index: -1, description: "", category: "" },
       left: null,
       right: null,
       answerLeft: null,
@@ -50,6 +46,7 @@ Vue.createApp({
       score: 0,
     };
   },
+
   methods: {
     galleryForward() {
       this.galleryNum++;
@@ -63,6 +60,7 @@ Vue.createApp({
         this.galleryNum = 8;
       }
     },
+
     typeName() {
       let i = 0;
       const nameLength = this.name.length;
@@ -76,6 +74,7 @@ Vue.createApp({
         }
       }, typeInterval);
     },
+
     typeJob() {
       let i = 0;
       const nameLength = this.job.length;
@@ -108,23 +107,29 @@ Vue.createApp({
       }, 500);
     },
     rollAllDice() {
-      this.dice.forEach((die, index) => {
-        this.rollDie(index);
-      });
+      this.dice.forEach(
+        (
+          die,
+
+          index
+        ) => {
+          this.rollDie(index);
+        }
+      );
     },
     deleteDie: function (index) {
       this.dice.splice(index, 1);
     },
     // Color Creator
     createColor() {
-      this.rgbStr = `rgb(${this.red}, ${this.green}, ${this.blue})`;
+      this.rgbStr = `rgb(${this.red},
+ ${this.green},
+ ${this.blue})`;
       this.txtColor = this.getTextColor(this.rgbStr);
-
       if (this.colorList.length >= 5) {
         this.colorList.shift();
       }
       this.colorList.push(this.rgbStr);
-
       this.red = null;
       this.green = null;
       this.blue = null;
@@ -134,17 +139,12 @@ Vue.createApp({
       const luminance = (r * 299 + g * 587 + b * 114) / 1000;
       return luminance > 128 ? "black" : "white";
     },
-
     // Magic 8 ball
     askQuestion: function () {
       let index = Math.floor(Math.random() * this.options.length);
       let message = this.options[index];
       this.message = message;
-
-      this.history.push({
-        question: this.question,
-        answer: this.message,
-      });
+      this.history.push({ question: this.question, answer: this.message });
       console.log(history);
       this.question = "";
     },
@@ -158,10 +158,7 @@ Vue.createApp({
     },
     // To-Do List
     addTask(taskDesc, taskCat) {
-      let task = {
-        description: taskDesc,
-        category: taskCat,
-      };
+      let task = { description: taskDesc, category: taskCat };
       taskDesc = "";
       taskCat = "";
       this.tasks.push(task);
@@ -175,7 +172,8 @@ Vue.createApp({
     sortTasks() {
       if (this.sortOrder === "asc") {
         this.tasks.sort((a, b) => {
-          if (a.description > b.description) return -1;
+          if (a.description > b.description) return;
+          -1;
           if (a.description < b.description) return 1;
           return 0;
         });
@@ -225,18 +223,22 @@ Vue.createApp({
     // Whack-A-Mole
     moveMole: function () {
       this.resetMole();
-      var moleTime = setInterval(() => {
-        this.moleRow = Math.ceil(Math.random() * this.rows);
-        this.moleCol = Math.ceil(Math.random() * this.columns);
-        this.total++;
-        if (this.total >= 10) {
-          setTimeout(() => {
-            this.moleRow = -1;
-            this.moleCol = -1;
-          }, 1000);
-          clearInterval(moleTime);
-        }
-      }, 1000);
+      var moleTime = setInterval(
+        () => {
+          this.moleRow = Math.ceil(Math.random() * this.rows);
+          this.moleCol = Math.ceil(Math.random() * this.columns);
+          this.total++;
+          if (this.total >= 10) {
+            setTimeout(() => {
+              this.moleRow = -1;
+              this.moleCol = -1;
+            }, 1000);
+            clearInterval(moleTime);
+          }
+        },
+
+        1000
+      );
     },
     resetMole: function () {
       this.score = 0;
@@ -248,6 +250,7 @@ Vue.createApp({
       this.moleCol = -1;
     },
   },
+
   created() {
     setTimeout(() => {
       this.typeName();

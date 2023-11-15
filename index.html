@@ -49,11 +49,14 @@
 
       <div id="projectHeader">Past Projects</div>
 
-      <section id="ticTacToe" v-show="galleryNum === 1">
+      <section
+        id="ticTacToe"
+        v-show="galleryNum === 1"
+        key="ticTacToe"
+        class="section"
+      >
         <h1>Tic Tac Toe</h1>
-
         <h2 class="whoseTurn">Current Turn: X</h2>
-
         <div class="board">
           <div class="row">
             <span class="tile row1 col1 diag1">1</span>
@@ -72,8 +75,7 @@
           </div>
         </div>
       </section>
-
-      <section id="color" v-show="galleryNum === 2">
+      <section id="color" v-show="galleryNum === 2" class="section" key="color">
         <h1>Color Creator</h1>
         <div class="container">
           <form @submit.prevent="createColor">
@@ -101,13 +103,11 @@
           </div>
         </div>
       </section>
-
-      <section id="diceRoller" v-show="galleryNum === 3">
+      <section id="diceRoller" v-show="galleryNum === 3" class="section">
         <h1>Dice Roller</h1>
         <p>Sides:</p>
         <input type="number" v-model="numInput" />
         <button @click="addDie">Add Die</button>
-
         <div class="dice-container">
           <div
             v-for="(die, index) in dice"
@@ -124,8 +124,7 @@
         </div>
         <button @click="rollAllDice()">Roll All Dice</button>
       </section>
-
-      <section id="magicBall" v-show="galleryNum === 4">
+      <section id="magicBall" v-show="galleryNum === 4" class="section">
         <h1>Magic 8 Ball</h1>
         <div id="ball">
           <div id="fortune">{{message}}</div>
@@ -149,8 +148,7 @@
           </div>
         </div>
       </section>
-
-      <section id="toDoList" v-show="galleryNum === 5">
+      <section id="toDoList" v-show="galleryNum === 5" class="section">
         <header>
           <h1>To-Do</h1>
           <div id="search">
@@ -163,7 +161,6 @@
             <div id="clear-search" v-on:click="clearSearch()">X</div>
           </div>
         </header>
-
         <div class="addTask">
           <h1>Add a New Task</h1>
           <input
@@ -185,7 +182,6 @@
             Add Task
           </button>
         </div>
-
         <div class="tasks">
           <div class="row-head" v-if="tasks.length > 0">
             <div></div>
@@ -198,7 +194,6 @@
             <div></div>
             <div></div>
           </div>
-
           <div
             v-for="task in filteredTasks"
             class="row-body"
@@ -210,7 +205,6 @@
             <button @click="toggleModal(index)" class="button">Edit</button>
             <button @click="deleteTask(index)" class="button">Delete</button>
           </div>
-
           <div
             v-for="(task, index) in tasks"
             class="row-body"
@@ -222,8 +216,7 @@
             <button @click="toggleModal(index)" class="button">Edit</button>
             <button @click="deleteTask(index)" class="button">Delete</button>
           </div>
-
-          <div class="modal" v-show="modalOpen">
+          <div class="modal" v-if="modalOpen">
             <div class="content">
               <div id="close" @click="toggleModal(index)">X</div>
               Description<input type="text" v-model="modal.description" />
@@ -233,17 +226,14 @@
           </div>
         </div>
       </section>
-
-      <section id="unitConverter" v-show="galleryNum === 6">
+      <section id="unitConverter" v-if="galleryNum === 6" class="section">
         <h1>Unit Converter</h1>
-
         <p>Gigabytes(GB) to Megabytes(MB)</p>
         <input type="number" v-model="left" />
         <button v-on:click="convertLeft" v-show="isValidInput(left)">
           Convert to MB
         </button>
         <div>{{ answerLeft }} MB</div>
-
         <p>Megabytes(MB) to Kilobytes(KB)</p>
         <input type="number" v-model="right" />
         <button v-on:click="convertRight" v-show="isValidInput(right)">
@@ -251,20 +241,16 @@
         </button>
         <div>{{ answerRight }} KB</div>
       </section>
-
-      <section id="werdle" :class="{ hideWerdle: galleryNum !== 7}">
+      <section id="werdle" v-show="galleryNum === 7" class="section">
         <h1>Werdle</h1>
-
         <div id="werdleGuesses"></div>
-
         <div id="inputs">
           <p>Use your keyboard to play!</p>
           <div id="message"></div>
           <div id="num-wins">Number of Wins:</div>
         </div>
       </section>
-
-      <section id="whackAMole" v-show="galleryNum === 8">
+      <section id="whackAMole" v-show="galleryNum === 8" class="section">
         <h1>Click-A-Mole!</h1>
         <div class="row" v-for="row in rows">
           <div class="col" v-for="col in columns">
@@ -310,7 +296,7 @@
         <button class="galleryButton" @click="galleryForward()">&gt;</button>
       </div>
     </div>
-    <script src="scripts/app.js"></script>
+    <script type="module" src="scripts/app.js"></script>
     <script src="scripts/tictactoe.js"></script>
     <script src="scripts/werdle.js"></script>
   </body>

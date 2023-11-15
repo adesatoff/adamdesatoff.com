@@ -1,6 +1,6 @@
 :root {
   --blue: #398bc9;
-  --orange: #9f5033;
+  --orange: #d75c2f;
 }
 
 * {
@@ -27,7 +27,6 @@ body {
 
 #waffle {
   margin-top: 150px;
-  margin-left: 35%;
   width: 75%;
   display: flex;
   align-items: flex-start;
@@ -110,10 +109,6 @@ button {
 .hideWerdle {
   position: absolute;
   bottom: 99999px;
-}
-
-section {
-  transition: display 0.5s ease-in-out;
 }
 
 @keyframes blink {
